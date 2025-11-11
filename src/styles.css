@@ -1,6 +1,7 @@
 /**
 * CSS file to hold styles that apply across the application
 */
+/* add an amazing animation to the social icons */  
 
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@200;400;600;800&display=swap");
 
@@ -122,4 +123,42 @@ a:hover {
 img.socialIcon {
   height: 30px;
   width: 30px;
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(.2,.8,.2,1), filter 300ms;
+  animation: floaty 6s ease-in-out infinite;
+  will-change: transform, filter;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+}
+
+/* Hover / focus pop and slight rotation for an "amazing" effect */
+img.socialIcon:hover,
+img.socialIcon:focus {
+  transform: translateY(-6px) rotate(-6deg) scale(1.12);
+  filter: drop-shadow(0 10px 18px rgba(78, 86, 126, 0.24)) saturate(1.15);
+  animation: pop 350ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Gentle floating animation so icons feel alive */
+@keyframes floaty {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(-2deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(4px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* Quick pop for hover transition */
+@keyframes pop {
+  0%   { transform: translateY(0) scale(1); }
+  40%  { transform: translateY(-10px) scale(1.18); }
+  100% { transform: translateY(-6px) scale(1.12); }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  img.socialIcon {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }
